@@ -6,8 +6,7 @@
 using namespace arma;
 using namespace std;
 
-const double LAMBDA = 0.001;
-const double SIGMA = 0.5;
+const double LAMBDA = 8;
 
 int main() {
     FILE *input = fopen("../../Spectra20.csv", "r");
@@ -20,7 +19,7 @@ int main() {
 
     fclose(input);
 
-    universal_approximator my_approx(xs, ys, LAMBDA, SIGMA);
+    universal_approximator my_approx(xs, ys, LAMBDA);
 
     vector<double> all_xs;
     for ( double i = 0; i <= 5; i += 0.01 )

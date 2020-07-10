@@ -1,11 +1,18 @@
 #include "universal_approximator.hpp"
 
 universal_approximator::universal_approximator(const vector<double> &x,
-        const vector<double> &y, double lambda, double sigma) : sigma(sigma) {
+        const vector<double> &y, double lambda) {
 
     int n = x.size();
     mat m(n, n);
     mat d = y;
+
+    // set sigma value with max(x[i]-x[j]) / sqrt(size(x))
+    double mx_d = 0;
+    for (int i = 0; i < n - 1; ++i) {
+        mx_d = max(abs(x[i] - x[i + 1]));
+    }
+    sigma = mx_d / sqrt(n);
 
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
@@ -13,8 +20,8 @@ universal_approximator::universal_approximator(const vector<double> &x,
         }
     }
 
+    // solve (m + lamda*I) * w = d
     m = m + lambda * eye(n, n);
-    // solve m * w = d
     mat ans = inv(m) * d;
 
     for (int i = 0; i < n; ++i) {
@@ -41,7 +48,6 @@ double universal_approximator::get_output(double x) {
 }
 
 vector<double> universal_approximator::test(const vector<double> &xs) {
-
     vector<double> fxs;
     int n = xs.size();
 

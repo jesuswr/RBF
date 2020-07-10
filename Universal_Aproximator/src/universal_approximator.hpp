@@ -14,7 +14,7 @@ class universal_approximator {
     vector<long double> G;
 public:
     universal_approximator(const vector<double> &x, const vector<double> &y,
-                           double lambda, double sigma);
+                           double lambda);
 
     double gaussian(double xi, double xj);
 
