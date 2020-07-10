@@ -10,7 +10,7 @@ universal_approximator::universal_approximator(const vector<double> &x,
     // set sigma value with max(x[i]-x[j]) / sqrt(size(x))
     double mx_d = 0;
     for (int i = 0; i < n - 1; ++i) {
-        mx_d = max(abs(x[i] - x[i + 1]));
+        mx_d = max(fabs(x[i] - x[i + 1]), mx_d);
     }
     sigma = mx_d / sqrt(n);
 
@@ -22,6 +22,7 @@ universal_approximator::universal_approximator(const vector<double> &x,
 
     // solve (m + lamda*I) * w = d
     m = m + lambda * eye(n, n);
+    //cout << cond(m) << endl;
     mat ans = inv(m) * d;
 
     for (int i = 0; i < n; ++i) {
@@ -32,7 +33,7 @@ universal_approximator::universal_approximator(const vector<double> &x,
 
 double universal_approximator::gaussian(double xi, double xj) {
     double num = (xi - xj) * (xi - xj) ;
-    double den = 2 * sigma * sigma;
+    double den = 2.0 * sigma * sigma;
     return exp( -num / den );
 }
 
