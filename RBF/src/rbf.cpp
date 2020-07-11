@@ -20,7 +20,7 @@ rbf::rbf(vector<double> &x,
 			dmax = max(fabs(means(0, i) - means(0, j)), dmax);
 		}
 	}
-	sigma = dmax / MEANS_SIZE;
+	sigma = dmax / (2*MEANS_SIZE);
 
 	mat G(n, MEANS_SIZE);
 	for (int i = 0; i < n; ++i) {

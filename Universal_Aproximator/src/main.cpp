@@ -6,7 +6,7 @@
 using namespace arma;
 using namespace std;
 
-const double LAMBDA = 0.05;
+const double LAMBDA = 0;
 
 int main() {
     FILE *input = fopen("../../Spectra20.csv", "r");
