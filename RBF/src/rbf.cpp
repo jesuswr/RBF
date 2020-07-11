@@ -1,6 +1,6 @@
 #include "rbf.hpp"
 
-const int MEANS_SIZE = 20;
+const int MEANS_SIZE = 25;
 
 rbf::rbf(vector<double> &x,
          vector<double> &y, double lambda) {
@@ -9,7 +9,7 @@ rbf::rbf(vector<double> &x,
 	mat means;
 	mat d = y;
 
-	if ( !kmeans(means, data, MEANS_SIZE, random_subset, 10, false) ) {
+	if ( !kmeans(means, data, MEANS_SIZE, random_subset, 0, false) ) {
 		printf("Error in kmeans\n");
 		exit(-1);
 	}
