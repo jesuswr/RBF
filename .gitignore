@@ -1,2 +1,4 @@
 *.csv
 *output
+*.o
+*test
